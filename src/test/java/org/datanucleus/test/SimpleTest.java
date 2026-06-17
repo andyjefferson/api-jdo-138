@@ -15,7 +15,13 @@ public class SimpleTest
     public void testSimple()
     {
         NucleusLogger.GENERAL.info(">> test START");
-        JDOPersistenceManagerFactory pmf = (JDOPersistenceManagerFactory)JDOHelper.getPersistenceManagerFactory("MyTest");
+        Properties props = new Properties();
+        props.setProperty("javax.jdo.PersistenceManagerFactoryClass", "org.datanucleus.api.jdo.JDOPersistenceManagerFactory");
+        props.setProperty("javax.jdo.option.ConnectionURL", "jdbc:h2:mem:nucleus");
+        props.setProperty("javax.jdo.option.ConnectionUserName", "sa");
+        props.setProperty("javax.jdo.option.ConnectionPassword", "");
+        props.setProperty("datanucleus.allowListenerUpdateAfterInit", "true");
+        JDOPersistenceManagerFactory pmf = (JDOPersistenceManagerFactory)JDOHelper.getPersistenceManagerFactory(props);
 
         try
         {
